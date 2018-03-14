@@ -1,20 +1,35 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="box">
+  <input (keyup)="searchTerm$.next($event.target.value)">
 
+  <ul *ngIf="results">
+    <li *ngFor="let result of results | slice:0:10">
+      <a href="{{ result.latest }}" target="_blank">
+        {{ result.name }}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="description">
+  <h2>Real Time Search to the cdnjs API with Observables and RxJS</h2>
+  <br>
+  <h4>Search Service</h4>
+  <p>Import HttpClient, Observable, and rxjs debounceTime, distinctUntilChanged, and switchMap operators.</p>
+  <p>The search method takes an observable of strings and uses the rxjs operators to limit the amount of requests.</p>
+  <p>'debounceTime' takes a milliseconds parameter and waits until that time passes with no changes before letting the data pass through. I used 250ms.</p>
+  <p>'distinctUntilChanged' ensures that only distinct or different data passes through.</p>
+  <p>'switchMap' combines observable strings recieved from the searchEntries method into one variable.</p>
+  <p>The searchEntries method makes the API get request with the search term after passing through the rxjs operators. This returns an observable and is automatically mapped to json by Angular HttpClient.</p>
+  <br>
+  <h4>Component</h4>
+  <p>Initialize searchTerm variable as a new rxjs Subject and a results variable.</p>
+  <p>In the constructor, call the searchService 'search' method passing in the subject and subscribing to it. In the subscription assign the local results variable to the search results.</p>
+  <br>
+  <h4>Template</h4>
+  <p>Use the keyup event handler on the input tag to call the .next() method on the searchTerm subject, passing in the value.</p>
+  <p>Iterate over the first 10 results using ngFor and the slice pipe.</p>
+  <p>Lastly, use the Roboto font and apply some basic styles.</p>
+  <hr>
+</div>

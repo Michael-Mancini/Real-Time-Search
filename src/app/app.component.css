@@ -1,0 +1,13 @@
+.box {
+    width: 222px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.description {
+    width: 90%;
+    max-width: 666px;
+    padding: 5px;
+    margin: 0 auto 500px;
+}
